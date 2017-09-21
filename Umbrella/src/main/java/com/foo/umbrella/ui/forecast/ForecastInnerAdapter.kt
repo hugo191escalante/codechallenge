@@ -11,9 +11,6 @@ import com.foo.umbrella.R
 import com.foo.umbrella.data.model.entities.ForecastCondition
 import kotlinx.android.synthetic.main.recycler_forecast_inner.view.*
 
-/**
- * Created by user on 9/21/17.
- */
 class ForecastInnerAdapter(private val forecastConditions: List<ForecastCondition>, private val isCelsius: Boolean, private val coolestHour: ForecastCondition?, private val warmestHour: ForecastCondition?) : RecyclerView.Adapter<ForecastInnerAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(forecastConditions[position], isCelsius, coolestHour, warmestHour)
 
@@ -34,7 +31,6 @@ class ForecastInnerAdapter(private val forecastConditions: List<ForecastConditio
                 true -> r_inner_temperature.text = "${forecastCondition.tempCelsius} °"
                 false -> r_inner_temperature.text = "${forecastCondition.tempFahrenheit} °"
             }
-            println("TAG_" + forecastCondition.dateTime + " " + warmestHour?.dateTime)
 
             colorize(forecastCondition, warmestHour, coolestHour)
         }

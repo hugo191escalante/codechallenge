@@ -9,10 +9,6 @@ import com.foo.umbrella.R
 import com.foo.umbrella.data.model.entities.ForecastConditionDay
 import kotlinx.android.synthetic.main.recycler_forecast_day.view.*
 
-/**
- * Created by user on 9/21/17.
- */
-
 class ForecastAdapter(private val forecastConditions: List<ForecastConditionDay>, private val isCelsius: Boolean) : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = forecastConditions.size

@@ -9,10 +9,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-/**
- * Created by user on 9/21/17.
- */
-
 class ForecastPresenter(private val weatherRepository: WeatherRepository) : ForecastContract.Presenter {
 
     var view: ForecastContract.View? = null

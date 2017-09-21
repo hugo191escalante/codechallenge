@@ -5,10 +5,6 @@ import com.foo.umbrella.di.scopes.ViewScope
 import dagger.Module
 import dagger.Provides
 
-/**
- * Created by user on 9/21/17.
- */
-
 @Module
 class ForecastModule {
 

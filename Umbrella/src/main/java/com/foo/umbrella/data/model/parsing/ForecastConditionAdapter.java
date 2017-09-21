@@ -22,8 +22,7 @@ public class ForecastConditionAdapter {
         LocalDateTime dateTime = LocalDateTime.of(fcTTime.getYear(), fcTTime.getMon(),
                 fcTTime.getMday(), fcTTime.getHour(), fcTTime.getMin());
 
-        String displayTime = String.format("%s:%s %s", fcTTime.getHour(), fcTTime.getMin(),
-                fcTTime.getAmpm());
+        String displayTime = String.format("%s:00 %s", fcTTime.getHour(), fcTTime.getAmpm());
 
         Temperature temperature = forecastConditionJson.getTemperature();
 

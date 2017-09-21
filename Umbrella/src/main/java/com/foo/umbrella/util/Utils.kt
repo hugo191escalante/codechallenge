@@ -3,9 +3,6 @@ package com.foo.umbrella.util
 import com.foo.umbrella.data.model.entities.ForecastCondition
 import com.foo.umbrella.data.model.entities.ForecastConditionDay
 
-/**
- * Created by user on 9/21/17.
- */
 class Utils {
     companion object {
         fun parseForecastConditions(forecastConditions: MutableList<ForecastCondition>): List<ForecastConditionDay> {

@@ -21,10 +21,6 @@ import timber.log.Timber
 import java.io.File
 import javax.inject.Singleton
 
-/**
- * Created by user on 9/20/17.
- */
-
 @Module
 class NetworkModule {
 

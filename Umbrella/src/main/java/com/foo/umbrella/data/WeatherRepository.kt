@@ -5,10 +5,6 @@ import com.foo.umbrella.data.model.entities.WeatherData
 import com.foo.umbrella.data.remote.WeatherRemoteDataSource
 import io.reactivex.Observable
 
-/**
- * Created by user on 9/21/17.
- */
-
 class WeatherRepository(private val weatherLocalDataSource: WeatherLocalDataSource, private val weatherRemoteDataSource: WeatherRemoteDataSource) : WeatherDataSource {
 
     // TODO: Add logic for local repository
