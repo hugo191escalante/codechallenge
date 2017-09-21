@@ -2,9 +2,9 @@ package com.foo.umbrella.di
 
 import android.content.Context
 import com.foo.umbrella.BuildConfig
-import com.foo.umbrella.data.remote.WeatherService
 import com.foo.umbrella.data.model.parsing.ForecastConditionAdapter
 import com.foo.umbrella.data.model.parsing.MoshiAdapterFactory
+import com.foo.umbrella.data.remote.WeatherService
 import com.jakewharton.byteunits.DecimalByteUnit.MEGABYTES
 import com.jakewharton.picasso.OkHttp3Downloader
 import com.squareup.moshi.KotlinJsonAdapterFactory
@@ -43,9 +43,11 @@ class NetworkModule {
     fun provideOkHttp(cache: Cache): OkHttpClient {
         return OkHttpClient.Builder()
                 .cache(cache)
-                .build();
+                .build()
     }
 
+    @Singleton
+    @Provides
     fun provideMoshi(): Moshi {
         return Moshi.Builder()
                 .add(KotlinJsonAdapterFactory())

@@ -2,9 +2,9 @@ package com.foo.umbrella.data;
 
 import android.app.Application;
 
-import com.foo.umbrella.data.remote.WeatherService;
 import com.foo.umbrella.data.model.parsing.ForecastConditionAdapter;
 import com.foo.umbrella.data.model.parsing.MoshiAdapterFactory;
+import com.foo.umbrella.data.remote.WeatherService;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.moshi.Moshi;
 import com.squareup.picasso.Picasso;

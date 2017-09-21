@@ -9,10 +9,10 @@ import io.reactivex.Observable
  * Created by user on 9/21/17.
  */
 
-class WeatherRepository(val weatherLocalDataSource: WeatherLocalDataSource, val weatherRemoteDataSource: WeatherRemoteDataSource) : WeatherDataSource {
+class WeatherRepository(private val weatherLocalDataSource: WeatherLocalDataSource, private val weatherRemoteDataSource: WeatherRemoteDataSource) : WeatherDataSource {
 
     // TODO: Add logic for local repository
-    override fun loadForecast(zipCode: String): Observable<WeatherData> = weatherLocalDataSource.loadForecast(zipCode)
+    override fun loadForecast(zipCode: String): Observable<WeatherData> = weatherRemoteDataSource.loadForecast(zipCode)
 
     override fun saveForecast(weatherData: WeatherData) {}
 }

@@ -1,7 +1,6 @@
 package com.foo.umbrella.data
 
 import com.foo.umbrella.data.model.entities.WeatherData
-import io.reactivex.Flowable
 import io.reactivex.Observable
 
 /**
