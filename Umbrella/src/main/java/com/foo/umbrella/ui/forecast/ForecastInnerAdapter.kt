@@ -40,13 +40,10 @@ class ForecastInnerAdapter(private val forecastConditions: List<ForecastConditio
         }
 
         private fun View.colorize(forecastCondition: ForecastCondition, warmestHour: ForecastCondition?, coolestHour: ForecastCondition?) {
-            val color: Int
-            if (forecastCondition.dateTime == warmestHour?.dateTime) {
-                color = ContextCompat.getColor(context, R.color.weather_warm)
-            } else if (forecastCondition.dateTime == coolestHour?.dateTime) {
-                color = ContextCompat.getColor(context, R.color.weather_cool)
-            } else {
-                color = ContextCompat.getColor(context, R.color.text_color_primary)
+            val color: Int = when {
+                forecastCondition.dateTime == warmestHour?.dateTime -> ContextCompat.getColor(context, R.color.weather_warm)
+                forecastCondition.dateTime == coolestHour?.dateTime -> ContextCompat.getColor(context, R.color.weather_cool)
+                else -> ContextCompat.getColor(context, R.color.text_color_primary)
             }
 
             r_inner_icon.setColorFilter(color)
