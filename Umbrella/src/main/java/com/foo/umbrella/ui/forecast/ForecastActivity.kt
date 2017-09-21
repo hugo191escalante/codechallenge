@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import com.foo.umbrella.R
 import com.foo.umbrella.UmbrellaApp
 import com.foo.umbrella.data.model.entities.ForecastCondition
@@ -37,6 +39,21 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
         super.onDestroy()
 
         forecastPresenter.detachView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.forecast_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.m_forecast_settings -> {
+                newSettingsActivity()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun showError(error: String) {
@@ -82,5 +99,9 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
 
     private fun initViews() {
         setSupportActionBar(a_forecast_toolbar)
+    }
+
+    private fun newSettingsActivity() {
+        println("HEHEHE")
     }
 }
