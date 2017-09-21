@@ -10,6 +10,7 @@ import android.view.MenuItem
 import com.foo.umbrella.R
 import com.foo.umbrella.UmbrellaApp
 import com.foo.umbrella.data.model.entities.ForecastConditionDay
+import com.foo.umbrella.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_forecast.*
 import javax.inject.Inject
 
@@ -114,6 +115,6 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
     }
 
     private fun newSettingsActivity() {
-        println("HEHEHE")
+        SettingsActivity.newActivity(this)
     }
 }
