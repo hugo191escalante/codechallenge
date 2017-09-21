@@ -110,6 +110,7 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
 
         a_forecast_recycler.layoutManager = LinearLayoutManager(this)
         a_forecast_recycler.adapter = adapter
+        a_forecast_recycler.setHasFixedSize(true)
     }
 
     private fun newSettingsActivity() {

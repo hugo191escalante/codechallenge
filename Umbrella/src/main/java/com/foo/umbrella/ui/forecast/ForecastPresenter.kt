@@ -32,7 +32,7 @@ class ForecastPresenter(private val weatherRepository: WeatherRepository) : Fore
     override fun loadForecast() {
         view?.showProgress()
 
-        weatherRepository.loadForecast("30339")
+        weatherRepository.loadForecast("94016")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ validateWeatherData(it) },

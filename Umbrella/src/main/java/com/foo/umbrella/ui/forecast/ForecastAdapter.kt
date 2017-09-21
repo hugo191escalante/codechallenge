@@ -3,6 +3,7 @@ package com.foo.umbrella.ui.forecast
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,9 @@ class ForecastAdapter(private val forecastConditions: List<ForecastConditionDay>
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(forecastConditionDay: ForecastConditionDay, isCelsius: Boolean) = with(itemView) {
-            r_forecast_txt.text = "${forecastConditionDay.day} ${forecastConditionDay.coolestHour?.tempCelsius} ${forecastConditionDay.warmestHour?.tempCelsius}"
+            // TODO: Show 'Today', 'Yesterday' labels using DateUtils.getRelativeTimeSpanString()
+            r_forecast_txt.text = forecastConditionDay.day.toString()
+
             val forecastInnerAdapter = ForecastInnerAdapter(forecastConditionDay.forecastConditions, isCelsius)
             r_forecast_recycler.layoutManager = GridLayoutManager(itemView.context, 4, GridLayoutManager.VERTICAL, false)
             r_forecast_recycler.adapter = forecastInnerAdapter

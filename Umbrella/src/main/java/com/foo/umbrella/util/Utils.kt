@@ -12,13 +12,14 @@ class Utils {
             val result: ArrayList<ForecastConditionDay> = ArrayList()
             val dateMap: HashMap<Int, ArrayList<ForecastCondition>> = fillMap(forecastConditions)
 
-            for ((key, value) in dateMap) {
+            for ((_, value) in dateMap) {
                 val minEntry = value.minBy { forecastCondition -> forecastCondition.tempCelsius }
                 val maxEntry = value.maxBy { forecastCondition -> forecastCondition.tempCelsius }
 
-                result.add(ForecastConditionDay(key.toString(), value, minEntry, maxEntry))
+                result.add(ForecastConditionDay(value[0].dateTime.toLocalDate(), value, minEntry, maxEntry))
             }
 
+            result.sortByDescending { it.day }
             return result
         }
 
