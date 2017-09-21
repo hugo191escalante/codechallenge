@@ -68,7 +68,7 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
 
         a_forecast_city.text = city
         a_forecast_description.text = description
-        a_forecast_temperature.text = temperature.toString()
+        a_forecast_temperature.text = "$temperature °"
 
         when (isCold) {
             true -> a_forecast_toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weather_cool))
