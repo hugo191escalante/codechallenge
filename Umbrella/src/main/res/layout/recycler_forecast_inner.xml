@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginBottom="12dp"
+    android:layout_marginBottom="@dimen/margin_hourly_bottom"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -18,7 +18,7 @@
         android:id="@+id/r_inner_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
+        android:layout_margin="@dimen/margin_hourly_icon"
         android:contentDescription="@string/weather_icon" />
 
     <TextView

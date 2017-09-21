@@ -1,4 +1,17 @@
 <resources>
     <dimen name="default_margin">16dp</dimen>
     <dimen name="default_padding">16dp</dimen>
+
+    <dimen name="margin_toolbar_top">16dp</dimen>
+    <dimen name="padding_recycler_forecast">8dp</dimen>
+    <dimen name="margin_toolbar_bottom">16dp</dimen>
+    <dimen name="margin_card_forecast">8dp</dimen>
+    <dimen name="radius_card_forecast">3dp</dimen>
+    <dimen name="elevation_card_forecast">4dp</dimen>
+    <dimen name="margin_forecast_card">16dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="margin_divier_bottom">16dp</dimen>
+    <dimen name="margin_divider_top">16dp</dimen>
+    <dimen name="margin_hourly_bottom">12dp</dimen>
+    <dimen name="margin_hourly_icon">4dp</dimen>
 </resources>
