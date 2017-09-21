@@ -4,6 +4,7 @@ import com.foo.umbrella.data.WeatherRepository
 import com.foo.umbrella.data.model.entities.CurrentObservation
 import com.foo.umbrella.data.model.entities.ForecastCondition
 import com.foo.umbrella.data.model.entities.WeatherData
+import com.foo.umbrella.util.Utils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -48,7 +49,8 @@ class ForecastPresenter(private val weatherRepository: WeatherRepository) : Fore
     }
 
     private fun generateForecast(forecast: MutableList<ForecastCondition>) {
-        view?.showForecast(forecast, isCelsius)
+        val forecastConditionDays = Utils.parseForecastConditions(forecast)
+        view?.showForecast(forecastConditionDays, isCelsius)
     }
 
     private fun generateHeader(currentObservation: CurrentObservation) {

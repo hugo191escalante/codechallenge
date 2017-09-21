@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.foo.umbrella.R
 import com.foo.umbrella.UmbrellaApp
-import com.foo.umbrella.data.model.entities.ForecastCondition
+import com.foo.umbrella.data.model.entities.ForecastConditionDay
 import kotlinx.android.synthetic.main.activity_forecast.*
 import javax.inject.Inject
 
@@ -18,6 +19,9 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
 
     @Inject
     lateinit var forecastPresenter: ForecastPresenter
+
+    private val forecasts: MutableList<ForecastConditionDay> = mutableListOf<ForecastConditionDay>()
+    private var adapter: ForecastAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,15 +63,17 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
     override fun showError(error: String) {
         // TODO: Handle errors to be human readable
         Snackbar.make(a_forecast_content, error, Snackbar.LENGTH_SHORT).show()
-        println("ForecastActivityTAG_: showError:" + error)
+        println("$TAG showError:" + error)
     }
 
     override fun showProgress() {
-        println("ForecastActivityTAG_: showProgress:")
+        // TODO: Add ProgressBar
+        println("$TAG showProgress:")
     }
 
     override fun hideProgress() {
-        println("ForecastActivityTAG_: hideProgress:")
+        // TODO: Hide ProgressBar
+        println("$TAG hideProgress:")
     }
 
     override fun injectDependencies() {
@@ -81,8 +87,6 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
     }
 
     override fun showCurrent(city: String, temperature: Int, description: String, isCold: Boolean) {
-        println("ForecastActivityTAG_: showCurrent() $city $temperature $description $isCold")
-
         a_forecast_city.text = city
         a_forecast_description.text = description
         a_forecast_temperature.text = "$temperature °"
@@ -93,12 +97,19 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
         }
     }
 
-    override fun showForecast(forecastCondition: List<ForecastCondition>, isCelsius: Boolean) {
-        println("ForecastActivityTAG_: showForecast() $forecastCondition $isCelsius")
+    override fun showForecast(forecastDays: List<ForecastConditionDay>, isCelsius: Boolean) {
+        forecasts.clear()
+        forecasts.addAll(forecastDays)
+        adapter?.notifyDataSetChanged()
     }
 
     private fun initViews() {
         setSupportActionBar(a_forecast_toolbar)
+
+        adapter = ForecastAdapter(forecasts, true)
+
+        a_forecast_recycler.layoutManager = LinearLayoutManager(this)
+        a_forecast_recycler.adapter = adapter
     }
 
     private fun newSettingsActivity() {
