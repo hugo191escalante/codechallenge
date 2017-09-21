@@ -8,11 +8,12 @@ import com.foo.umbrella.R;
 import com.foo.umbrella.data.ApiServicesProvider;
 import com.foo.umbrella.data.model.WeatherData;
 
-import retrofit2.adapter.rxjava.Result;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.adapter.rxjava2.Result;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,19 +30,26 @@ public class MainActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Result<WeatherData>>() {
                     @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "onCompleted: ");
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.d(TAG, "onSubscribe: ");
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-                        Log.d(TAG, "onError: ");
+                    public void onNext(@NonNull Result<WeatherData> weatherDataResult) {
+                        if (!weatherDataResult.isError()) {
+                            Log.d(TAG, "onNext: " + weatherDataResult.response().body());
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d(TAG, "onError: " + e);
                         e.printStackTrace();
                     }
 
                     @Override
-                    public void onNext(Result<WeatherData> weatherDataResult) {
-                        Log.d(TAG, "onNext: " + weatherDataResult.response().body());
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete: ");
                     }
                 });
     }
