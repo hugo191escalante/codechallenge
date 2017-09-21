@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.foo.umbrella.R
 import com.foo.umbrella.UmbrellaApp
-import com.foo.umbrella.data.model.entities.CurrentObservation
 import com.foo.umbrella.data.model.entities.ForecastCondition
 import javax.inject.Inject
 
@@ -32,6 +31,7 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
+
         forecastPresenter.detachView()
     }
 
@@ -57,13 +57,11 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
                 .inject(this)
     }
 
-    override fun showCurrent(currentObservation: CurrentObservation) {
-        println("ForecastActivityTAG_: showCurrent() " + currentObservation)
+    override fun showCurrent(city: String, temperature: Int, description: String, isCold: Boolean) {
+        println("ForecastActivityTAG_: showCurrent() $city $temperature $description $isCold")
     }
 
-    override fun showForecast(forecastCondition: List<ForecastCondition>) {
-        println("ForecastActivityTAG_: showForecast() " + forecastCondition)
+    override fun showForecast(forecastCondition: List<ForecastCondition>, isCelsius: Boolean) {
+        println("ForecastActivityTAG_: showForecast() $forecastCondition $isCelsius")
     }
-
-
 }

@@ -1,6 +1,8 @@
 package com.foo.umbrella.ui.forecast
 
 import com.foo.umbrella.data.WeatherRepository
+import com.foo.umbrella.data.model.entities.CurrentObservation
+import com.foo.umbrella.data.model.entities.ForecastCondition
 import com.foo.umbrella.data.model.entities.WeatherData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -14,6 +16,8 @@ class ForecastPresenter(private val weatherRepository: WeatherRepository) : Fore
     var view: ForecastContract.View? = null
 
     private val compositeDisposable: CompositeDisposable? = CompositeDisposable()
+    private var weatherData: WeatherData? = null
+    private var isCelsius: Boolean = true
 
     override fun attachView(view: ForecastContract.View) {
         this.view = view
@@ -37,7 +41,22 @@ class ForecastPresenter(private val weatherRepository: WeatherRepository) : Fore
     }
 
     private fun validateWeatherData(weatherData: WeatherData) {
-        view?.showCurrent(weatherData.currentObservation)
-        view?.showForecast(weatherData.forecast)
+        this.weatherData = weatherData
+
+        generateHeader(weatherData.currentObservation)
+        generateForecast(weatherData.forecast)
+    }
+
+    private fun generateForecast(forecast: MutableList<ForecastCondition>) {
+        view?.showForecast(forecast, isCelsius)
+    }
+
+    private fun generateHeader(currentObservation: CurrentObservation) {
+        val temperature = if (isCelsius) currentObservation.tempCelsius.toInt() else currentObservation.tempFahrenheit.toInt()
+        val city = currentObservation.displayLocation.fullName
+        val description = currentObservation.weatherDescription
+        val isCold = currentObservation.tempCelsius.toInt() < 30
+
+        view?.showCurrent(city, temperature, description, isCold)
     }
 }

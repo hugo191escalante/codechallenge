@@ -2,7 +2,6 @@ package com.foo.umbrella.ui.forecast
 
 import com.foo.umbrella.base.BasePresenter
 import com.foo.umbrella.base.BaseView
-import com.foo.umbrella.data.model.entities.CurrentObservation
 import com.foo.umbrella.data.model.entities.ForecastCondition
 
 /**
@@ -11,8 +10,8 @@ import com.foo.umbrella.data.model.entities.ForecastCondition
 
 interface ForecastContract {
     interface View : BaseView {
-        fun showCurrent(currentObservation: CurrentObservation)
-        fun showForecast(forecastCondition: List<ForecastCondition>)
+        fun showCurrent(city: String, temperature: Int, description: String, isCold: Boolean)
+        fun showForecast(forecastCondition: List<ForecastCondition>, isCelsius: Boolean)
     }
 
     interface Presenter : BasePresenter<View> {
