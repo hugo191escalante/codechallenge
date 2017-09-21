@@ -52,10 +52,13 @@ class ForecastPresenter(private val weatherRepository: WeatherRepository) : Fore
     }
 
     private fun generateHeader(currentObservation: CurrentObservation) {
-        val temperature = if (isCelsius) currentObservation.tempCelsius.toInt() else currentObservation.tempFahrenheit.toInt()
+        val temperature: Int = when (isCelsius) {
+            true -> currentObservation.tempCelsius.toDouble().toInt()
+            false -> currentObservation.tempFahrenheit.toDouble().toInt()
+        }
         val city = currentObservation.displayLocation.fullName
         val description = currentObservation.weatherDescription
-        val isCold = currentObservation.tempCelsius.toInt() < 30
+        val isCold = currentObservation.tempCelsius.toDouble().toInt() < 30
 
         view?.showCurrent(city, temperature, description, isCold)
     }
