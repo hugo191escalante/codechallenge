@@ -2,10 +2,8 @@ package com.foo.umbrella.ui.forecast
 
 import com.foo.umbrella.data.WeatherRepository
 import com.foo.umbrella.data.model.entities.WeatherData
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 
 /**
