@@ -1,7 +1,7 @@
-package com.foo.umbrella.data.api;
+package com.foo.umbrella.data.remote;
 
 import com.foo.umbrella.BuildConfig;
-import com.foo.umbrella.data.model.WeatherData;
+import com.foo.umbrella.data.model.entities.WeatherData;
 
 import io.reactivex.Observable;
 import retrofit2.Call;
@@ -24,5 +24,11 @@ public interface WeatherService {
      * Get the forecast for a given zip code using {@link Observable}
      */
     @GET("/api/" + BuildConfig.API_KEY + "/conditions/hourly/q/{zip}.json")
-    Observable<Result<WeatherData>> forecastForZipObservable(@Path("zip") String zipCode);
+    Observable<Result<WeatherData>> forecastForZipResult(@Path("zip") String zipCode);
+
+    /**
+     * Get the plain forecast for a given zip code using {@link Observable}
+     */
+    @GET("/api/" + BuildConfig.API_KEY + "/conditions/hourly/q/{zip}.json")
+    Observable<WeatherData> forecastForZipObservable(@Path("zip") String zipCode);
 }

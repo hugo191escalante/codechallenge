@@ -2,24 +2,24 @@ package com.foo.umbrella.di
 
 import android.content.Context
 import com.foo.umbrella.BuildConfig
-import com.foo.umbrella.data.api.WeatherService
-import com.foo.umbrella.data.model.ForecastConditionAdapter
-import com.foo.umbrella.data.model.MoshiAdapterFactory
+import com.foo.umbrella.data.remote.WeatherService
+import com.foo.umbrella.data.model.parsing.ForecastConditionAdapter
+import com.foo.umbrella.data.model.parsing.MoshiAdapterFactory
+import com.jakewharton.byteunits.DecimalByteUnit.MEGABYTES
+import com.jakewharton.picasso.OkHttp3Downloader
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
 import okhttp3.OkHttpClient
-import java.io.File
-import javax.inject.Singleton
-
-import com.jakewharton.byteunits.DecimalByteUnit.MEGABYTES
-import com.jakewharton.picasso.OkHttp3Downloader
-import com.squareup.moshi.Moshi
-import com.squareup.picasso.Picasso
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
+import java.io.File
+import javax.inject.Singleton
 
 /**
  * Created by user on 9/20/17.
@@ -48,6 +48,7 @@ class NetworkModule {
 
     fun provideMoshi(): Moshi {
         return Moshi.Builder()
+                .add(KotlinJsonAdapterFactory())
                 .add(ForecastConditionAdapter())
                 .add(MoshiAdapterFactory.create())
                 .build()
@@ -55,11 +56,11 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, moshiAdapter: Moshi): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl(BuildConfig.API_URL)
-                .addConverterFactory(MoshiConverterFactory.create(moshiAdapter))
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
     }

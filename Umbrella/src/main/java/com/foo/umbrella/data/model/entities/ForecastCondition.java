@@ -1,4 +1,4 @@
-package com.foo.umbrella.data.model;
+package com.foo.umbrella.data.model.entities;
 
 import com.google.auto.value.AutoValue;
 

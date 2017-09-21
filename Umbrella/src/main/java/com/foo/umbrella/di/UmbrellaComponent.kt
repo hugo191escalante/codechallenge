@@ -8,7 +8,7 @@ import javax.inject.Singleton
  */
 
 @Singleton
-@Component(modules = arrayOf())
+@Component(modules = arrayOf(UmbrellaModule::class, NetworkModule::class, RepositoryModule::class))
 interface UmbrellaComponent {
 
 }
