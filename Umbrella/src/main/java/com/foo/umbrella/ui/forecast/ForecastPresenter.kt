@@ -18,7 +18,7 @@ class ForecastPresenter(private val weatherRepository: WeatherRepository) : Fore
 
     private val compositeDisposable: CompositeDisposable? = CompositeDisposable()
     private var weatherData: WeatherData? = null
-    private var isCelsius: Boolean = true
+    private var isCelsius: Boolean = false
 
     override fun attachView(view: ForecastContract.View) {
         this.view = view
@@ -32,7 +32,7 @@ class ForecastPresenter(private val weatherRepository: WeatherRepository) : Fore
     override fun loadForecast() {
         view?.showProgress()
 
-        weatherRepository.loadForecast("94016")
+        weatherRepository.loadForecast("94142")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ validateWeatherData(it) },
@@ -60,7 +60,7 @@ class ForecastPresenter(private val weatherRepository: WeatherRepository) : Fore
         }
         val city = currentObservation.displayLocation.fullName
         val description = currentObservation.weatherDescription
-        val isCold = currentObservation.tempCelsius.toDouble().toInt() < 30
+        val isCold = currentObservation.tempFahrenheit.toDouble().toInt() < 60
 
         view?.showCurrent(city, temperature, description, isCold)
     }

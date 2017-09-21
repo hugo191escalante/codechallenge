@@ -1,9 +1,7 @@
 package com.foo.umbrella.ui.forecast
 
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +30,7 @@ class ForecastAdapter(private val forecastConditions: List<ForecastConditionDay>
             // TODO: Show 'Today', 'Yesterday' labels using DateUtils.getRelativeTimeSpanString()
             r_forecast_txt.text = forecastConditionDay.day.toString()
 
-            val forecastInnerAdapter = ForecastInnerAdapter(forecastConditionDay.forecastConditions, isCelsius)
+            val forecastInnerAdapter = ForecastInnerAdapter(forecastConditionDay.forecastConditions, isCelsius, forecastConditionDay.coolestHour, forecastConditionDay.warmestHour)
             r_forecast_recycler.layoutManager = GridLayoutManager(itemView.context, 4, GridLayoutManager.VERTICAL, false)
             r_forecast_recycler.adapter = forecastInnerAdapter
         }

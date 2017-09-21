@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.recycler_forecast_inner.view.*
 /**
  * Created by user on 9/21/17.
  */
-class ForecastInnerAdapter(private val forecastConditions: List<ForecastCondition>, private val isCelsius: Boolean) : RecyclerView.Adapter<ForecastInnerAdapter.ViewHolder>() {
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(forecastConditions[position], isCelsius)
+class ForecastInnerAdapter(private val forecastConditions: List<ForecastCondition>, private val isCelsius: Boolean, private val coolestHour: ForecastCondition?, private val warmestHour: ForecastCondition?) : RecyclerView.Adapter<ForecastInnerAdapter.ViewHolder>() {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(forecastConditions[position], isCelsius, coolestHour, warmestHour)
 
     override fun getItemCount(): Int = forecastConditions.size
 
@@ -26,7 +26,7 @@ class ForecastInnerAdapter(private val forecastConditions: List<ForecastConditio
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(forecastCondition: ForecastCondition, isCelsius: Boolean) = with(itemView) {
+        fun bind(forecastCondition: ForecastCondition, isCelsius: Boolean, coolestHour: ForecastCondition?, warmestHour: ForecastCondition?) = with(itemView) {
             r_inner_time.text = forecastCondition.displayTime
             r_inner_icon.setImageDrawable(retrieveIcon(forecastCondition.icon, context))
 
@@ -34,6 +34,24 @@ class ForecastInnerAdapter(private val forecastConditions: List<ForecastConditio
                 true -> r_inner_temperature.text = "${forecastCondition.tempCelsius} °"
                 false -> r_inner_temperature.text = "${forecastCondition.tempFahrenheit} °"
             }
+            println("TAG_" + forecastCondition.dateTime + " " + warmestHour?.dateTime)
+
+            colorize(forecastCondition, warmestHour, coolestHour)
+        }
+
+        private fun View.colorize(forecastCondition: ForecastCondition, warmestHour: ForecastCondition?, coolestHour: ForecastCondition?) {
+            val color: Int
+            if (forecastCondition.dateTime == warmestHour?.dateTime) {
+                color = ContextCompat.getColor(context, R.color.weather_warm)
+            } else if (forecastCondition.dateTime == coolestHour?.dateTime) {
+                color = ContextCompat.getColor(context, R.color.weather_cool)
+            } else {
+                color = ContextCompat.getColor(context, R.color.text_color_primary)
+            }
+
+            r_inner_icon.setColorFilter(color)
+            r_inner_time.setTextColor(color)
+            r_inner_temperature.setTextColor(color)
         }
 
         private fun retrieveIcon(icon: String, context: Context): Drawable =

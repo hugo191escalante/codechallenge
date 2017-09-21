@@ -106,7 +106,7 @@ class ForecastActivity : AppCompatActivity(), ForecastContract.View {
     private fun initViews() {
         setSupportActionBar(a_forecast_toolbar)
 
-        adapter = ForecastAdapter(forecasts, true)
+        adapter = ForecastAdapter(forecasts, false)
 
         a_forecast_recycler.layoutManager = LinearLayoutManager(this)
         a_forecast_recycler.adapter = adapter
